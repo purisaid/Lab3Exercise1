@@ -1,17 +1,25 @@
 package th.ac.tu.siit.its333.lab3exercise1;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+        import android.content.Intent;
+        import android.support.v7.app.ActionBarActivity;
+        import android.os.Bundle;
+        import android.view.Menu;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.widget.EditText;
+        import android.widget.RadioButton;
+        import android.widget.RadioGroup;
+        import android.widget.TextView;
 
 
 public class CourseActivity extends ActionBarActivity {
-
+    String show;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+
+
     }
 
 
@@ -20,6 +28,20 @@ public class CourseActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_course, menu);
         return true;
+    }
+
+    public void addClicked(View v){
+        Intent res = new Intent();
+        EditText etCode = (EditText)findViewById(R.id.etCode);
+        EditText etCr = (EditText)findViewById(R.id.etCR);
+        RadioGroup Grade = (RadioGroup)findViewById(R.id.Grade);
+        RadioButton Rb = (RadioButton)findViewById(Grade.getCheckedRadioButtonId());
+        res.putExtra("etCode", etCode.getText().toString());
+        res.putExtra("etCr", Integer.parseInt(etCr.getText().toString()));
+        res.putExtra("Grade", Rb.getText().toString());
+
+        setResult(RESULT_OK, res);
+        finish();
     }
 
     @Override
